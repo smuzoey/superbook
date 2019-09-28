@@ -1,12 +1,12 @@
 package superbook.dao;
 
-import java.util.List;
-
-import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.BeanListHandler;
-
 import superbook.bean.Book;
 import superbook.util.DBUtil;
+
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.ResultSetHandler;
+import java.util.List;
 
 public class BookDao {
 	
@@ -28,7 +28,7 @@ public class BookDao {
 	 * 删除书籍
 	 * @param isbn
 	 */
-	public void delet(String isbn) {
+	public void delete(String isbn) {
 		String sql = "delete from Book where isbn = ?";
 		try {
 			DBUtil.update(sql, isbn);
@@ -64,20 +64,15 @@ public class BookDao {
 	 * @param isbn
 	 * @return
 	 */
-	public List<Book> selectByIsbn(String isbn) {
+	public Book selectByIsbn(String isbn) {
 		String sql = "select * from Book where isbn = ?";
-		ResultSetHandler<List<Book>> rsh = new BeanListHandler<Book>(Book.class);
-		List<Book> list = null;
+		Book book = new Book();
 		try {
-			list = DBUtil.select(sql,rsh,isbn);
-			for(Book b : list) {
-				System.out.println(b);
-			}
+			book = DBUtil.select(sql,new BeanHandler<Book>(Book.class),isbn);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return list;
+		return book;
 	}
-	
 	
 }

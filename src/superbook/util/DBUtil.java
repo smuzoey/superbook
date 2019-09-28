@@ -6,11 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 
+
 public class DBUtil {
-	static String ip = "127.0.0.1";
+	static String ip = "localhost";
 	static String database = "superbook";
 	static String encoding = "utf8";
 	static String user = "root";
@@ -41,7 +44,6 @@ public class DBUtil {
 		
 		//拼接URL地址
 		String url = String.format("jdbc:mysql://%s:%s/%s?userUnicode=true&characterEncoding=%s", ip, port, database, encoding)+"&serverTimezone=GMT%2B8&useSSL=false";
-		//String url = "jdbc:mysql://localhost:3306/superbook?useUnicode=true&characterEncoding=utf-8&useSSL=false";
 		System.out.println(url);
 		
 		//如果拿不到，或连接不可用
@@ -206,7 +208,9 @@ public class DBUtil {
 			}
 			// 执行SQL
 			rs = stmt.executeQuery();
-			return rs.toString();
+			if(rs.next()) {
+			return rs.getString(1);
+			}else return null;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -215,4 +219,41 @@ public class DBUtil {
 			close(stmt);
 		}
 	}
+	
+	/**
+	 * 返回多个数据
+	 * @param sql
+	 * @param params
+	 * @return
+	 */
+	public static List<String> selectList(String sql,Object... params) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		List<String> list = new ArrayList<>();
+ 		ResultSet rs = null;
+		try {
+			// 建立连接
+			conn = getConnection();
+			// 预编译SQL命令
+			stmt = conn.prepareStatement(sql);
+			// 设置参数
+			if (params != null) {
+				for (int i = 0; i < params.length; i++) {
+					stmt.setObject(i + 1, params[i]);
+				}
+			}
+			// 执行SQL
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}return list;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			// 释放资源
+			close(rs);
+			close(stmt);
+		}
+	}
+	
 }

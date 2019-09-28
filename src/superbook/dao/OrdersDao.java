@@ -1,5 +1,7 @@
 package superbook.dao;
 
+import java.util.Date;
+
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import superbook.bean.Orders;
@@ -51,6 +53,75 @@ public class OrdersDao {
 		}
 		System.out.println(order);
 		return order;
+	}
+	/**
+	 * 更改订单买家信息
+	 * @param receiver 买家
+	 * @param userMessage  买家信息
+	 * @param phone 买家电话
+	 */
+	public void changeUser(int oid,int receiver, String userMessage,String phone) {
+		String sql = "update Orders set receiver =? ,userMessage= ?, phone=? where oid = ?;";
+		try {
+			DBUtil.update(sql, receiver,userMessage,phone,oid);
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 更改支付时间
+	 * @param oid
+	 * @param payDate
+	 */
+	public void changePayDate(int oid,Date payDate) {
+		String sql = "update Orders set payDate =? where oid = ?;";
+		try {
+			DBUtil.update(sql, DateUtil.dtot(payDate),oid);
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 更改发货时间
+	 * @param oid
+	 * @param deliverDate
+	 */
+	public void changedeliverDate(int oid,Date deliverDate) {
+		String sql = "update Orders set  deliverDate =? where oid = ?;";
+		try {
+			DBUtil.update(sql, DateUtil.dtot( deliverDate),oid);
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * 更改确认收货日期
+	 * @param oid
+	 * @param confirmDate
+	 */
+	public void changeconfirmDate(int oid,Date confirmDate) {
+		String sql = "update Orders set  confirmDate =? where oid = ?;";
+		try {
+			DBUtil.update(sql, DateUtil.dtot( confirmDate),oid);
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 更改订单状态
+	 * @param oid
+	 * @param orderState
+	 */
+	public void changeState(int oid , int orderState) {
+		String sql = "update Orders set  orderState =? where oid = ?;";
+		try {
+			DBUtil.update(sql, orderState,oid);
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
 	}
 	
 }

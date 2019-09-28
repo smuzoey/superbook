@@ -37,13 +37,14 @@ public class MachineDao {
 	 * @return
 	 */
 	public String selectPosition(int mid) {
+		String result =null;
 		String sql = "select position from Machine where mid = ?;";
 		try {
-			DBUtil.select(sql, mid);
+			result = DBUtil.select(sql, mid);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "ok";
+		return result;
 	}
 	
 	/**
@@ -51,14 +52,30 @@ public class MachineDao {
 	 * @param mid
 	 * @return
 	 */
-	public String selectMachineState(int mid) {
+	public int selectMachineState(int mid) {
+		String result = null;
 		String sql = "select machineState from Machine where mid = ?;";
 		try {
-			DBUtil.select(sql, mid);
+			result = DBUtil.select(sql, mid);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "ok";
+		return Integer.parseInt(result);
 	}
 	
+	/**
+	 * 更改机器状态
+	 * @param mid 箱子号
+	 * @param machineState  要更改的箱子状态
+	 */
+	public void changeState(int mid,int machineState) {
+		String sql = "update Machine set  machineState = ? where mid = ?;";
+		try {
+			DBUtil.update(sql, machineState,mid);
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
+	}
+
+
 }

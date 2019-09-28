@@ -36,13 +36,25 @@ public class CategoryDao {
 	 * @param cid
 	 * @return
 	 */
-	public String selctname(int cid) {
+	public String selectname(int cid) {
+		String result = null;
 		String sql = "select name from Category where cid = ?;";
 		try {
-			DBUtil.select(sql, cid);
+			result = DBUtil.select(sql, cid);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "ok";
+		return result;
+	}
+	
+	public int selectcid(String name) {
+		String result = null;
+		String sql = "select cid from Category where name = ?;";
+		try {
+			result = DBUtil.select(sql, name);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return Integer.parseInt(result);
 	}
 }

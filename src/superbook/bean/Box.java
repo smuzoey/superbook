@@ -1,7 +1,7 @@
 package superbook.bean;
 
 public class Box {
-	private int bid; //盒子编号 自增
+	private int bid;
 	private int mid;//机器号
 	private int boxState;//箱子状态
 	private int size;//箱子大小

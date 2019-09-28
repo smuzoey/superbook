@@ -1,9 +1,12 @@
 package superbook.servlet;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,9 +98,8 @@ public class ProductImageServlet extends BaseServlet{
 		
 		//解析上传参数
 		is = parseUpload(request,params);
-		
 		int id = Integer.parseInt(params.get("id"));//获取图片编号
-		System.out.println(params.get("id"));
+		System.out.println(id);
 		
 		//创建文件路径
 		String imgFolder_single = request.getSession().getServletContext().getRealPath("img/productSingle");
@@ -111,8 +113,54 @@ public class ProductImageServlet extends BaseServlet{
 		f_small.delete();
 		File f_middle = new File(imgFolder_middle,id+".jpg");
 		f_middle.delete();
+	}
+	
+	/**
+	 * 向前端返回图片，所需数据 pid：图片编号   piid 和type 在数据库中获得
+	 * @param req
+	 * @param resp
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void show(HttpServletRequest req,HttpServletResponse resp)throws ServletException, IOException {
+		//获取请求参数
+		InputStream is = null;
+		Map<String,String> params = new HashMap<>();
 		
+		//解析上传参数
+		is = parseUpload(req,params);
+		String type = params.get("type");//获取图片编号
+		int id = Integer.parseInt(params.get("pid"));
 		
+		if(type == null || type.equals("")) return;
+		
+		//创建文件路径
+		String path = null;
+		switch (type) {
+		case "imgFolder_single" : 
+			path = req.getSession().getServletContext().getRealPath("img/productSingle");
+		    break;
+		case "imgFolder_small" : 
+			path = req.getSession().getServletContext().getRealPath("img/productSingle_small");
+            break;		
+		case "imgFolder_middle" : 
+			path = req.getSession().getServletContext().getRealPath("img/productSingle_middle");
+		    break;
+		}
+		
+		//创建文件
+		File f = new File(path,id+".jpg");
+		System.out.println(path+id +".jpg");
+		InputStream  imgis = new FileInputStream(f);
+		int count = imgis.available();
+		byte[]  data = new byte[count];  
+		resp.setHeader("Content-Type","image/jpeg");
+		imgis.read(data);
+		OutputStream out = resp.getOutputStream();
+		out.write(data);
+		out.flush();
+		out.close();
+		imgis.close();
 	}
 
 }

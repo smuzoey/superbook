@@ -1,21 +1,18 @@
 package superbook.dao;
 
 
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import superbook.bean.User;
 import superbook.util.DBUtil;
 
 public class UserDao {
 	/**
 	 * 添加用户
 	 * @param openId // 只存不取
-	 * @param uid    //openId映射的
 	 * @param nickName
 	 */
-	public void add(int  openId, int uid, String nickName) {
-		String sql = "insert into `user` (openId,uid,nickName) values(?,?,?)";
+	public void add(String  openId, String nickName) {
+		String sql = "insert into `user` (openId,nickName) values(?,?)";
 		try {
-			DBUtil.update(sql,openId,uid,nickName);
+			DBUtil.update(sql,openId,nickName);
 		} catch(Exception e) {
 			System.out.println(e);
 		}
@@ -45,7 +42,7 @@ public class UserDao {
 	public String selectOpenid(int uid) {
 		String sql = "select openId from user where uid = ?";
 		try {
-			System.out.println(DBUtil.select(sql, uid));
+			System.out.println("openId" + DBUtil.select(sql, uid));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

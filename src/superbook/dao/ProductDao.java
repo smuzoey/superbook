@@ -1,5 +1,7 @@
 package superbook.dao;
 
+import java.util.Date;
+
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import superbook.bean.Product;
@@ -15,13 +17,21 @@ public class ProductDao {
 	 * 添加Product
 	 * @param p
 	 */
-	public void add(Product p) {
+	public int add(Product p) {
 		String sql = "insert into Product(pid,cid,isbn,promotePrice,createDate,subTitle,degree) values(?,?,?,?,?,?,?);";
 		try {
 			DBUtil.update(sql, p.getPid(),p.getCid(),p.getIsbn(),p.getPromotePrice(),DateUtil.dtot(p.getCreateDate()),p.getSubTitle(),p.getDegree());
+			
+			/**
+			 * 返回自增的pid
+			 */
+			String sql2 = "select last_insert_id();";
+			return Integer.parseInt(DBUtil.select(sql2));
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		return -1;
 	}
 	
 	/**
@@ -50,8 +60,59 @@ public class ProductDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(p);
 		return p;
 	}
+	
+	/**
+	 * 修改新旧程度
+	 * @param pid
+	 * @param degree
+	 */
+	public void changedegree(int pid , int degree) {
+		String sql = "update Product set  degree =? where pid = ?;";
+		try {
+			DBUtil.update(sql, degree,pid);
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 修改价格
+	 * @param pid
+	 * @param promotePrice
+	 */
+	public void changepromotePrice(int pid , int promotePrice) {
+		String sql = "update Product set  promotePrice =? where pid = ?;";
+		try {
+			DBUtil.update(sql, promotePrice,pid);
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 修改发布日期
+	 * @param pid
+	 * @param createDate
+	 */
+	public void changecreateDate(int pid , Date createDate) {
+		String sql = "update Product set  createDate =? where pid = ?;";
+		try {
+			DBUtil.update(sql, DateUtil.dtot(createDate),pid);
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
+	}
+	
+/*
+	public static void main(String[] args) {
+		ProductDao pd = new ProductDao();
+		Product p = new Product();
+		p.setCid(666);
+		p.setIsbn("23424");
+		pd.add(p);
+	}
+*/
 	
 }

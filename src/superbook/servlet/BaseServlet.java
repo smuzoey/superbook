@@ -3,6 +3,7 @@ package superbook.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import net.sf.json.JSONObject;
+import superbook.util.JSONUtil;
 
 
 /**
@@ -79,6 +83,24 @@ public class BaseServlet extends HttpServlet {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public JSONObject getJSONParameter(HttpServletRequest request) {
+		JSONObject json = JSONUtil.getJSONParameter(request);
+		return json;
+	}
+	
+	public void write(HttpServletResponse response, String data) {
+		try {
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/json;character=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(data);
+		out.flush();
+		out.close();
+		}catch(IOException e) {
+			System.out.println("返回信息失败！");
 		}
 	}
 	

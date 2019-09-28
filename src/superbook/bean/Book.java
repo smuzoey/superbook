@@ -8,7 +8,7 @@ public class Book {
 	private String author;
 	private String paper;//纸质
 	private String title;
-	private float price;//原价
+	private Double price;//原价
 	private String img;
 	private String gist;//片段节选
 	
@@ -17,8 +17,8 @@ public class Book {
 	public Book() {
 		super();
 	}
-	public Book(String isbn, String publisher, String binding, int page, String author, String paper, String title,
-			float price, String img, String gist) {
+	public Book(String isbn, String publisher, String binding, Integer page, String author, String paper, String title,
+			Double price, String img, String gist) {
 		super();
 		this.isbn = isbn;
 		this.publisher = publisher;
@@ -53,7 +53,7 @@ public class Book {
 	public int getPage() {
 		return page;
 	}
-	public void setPage(int page) {
+	public void setPage(Integer page) {
 		this.page = page;
 	}
 	public String getAuthor() {
@@ -74,11 +74,11 @@ public class Book {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public float getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(float price) {
-		this.price = price;
+	public void setPrice(Double l) {
+		this.price = l;
 	}
 	public String getImg() {
 		return img;
@@ -103,7 +103,7 @@ public class Book {
 		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
 		result = prime * result + page;
 		result = prime * result + ((paper == null) ? 0 : paper.hashCode());
-		result = prime * result + Float.floatToIntBits(price);
+		result = (int) (prime * result + Double.doubleToLongBits(price));
 		result = prime * result + ((publisher == null) ? 0 : publisher.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
@@ -150,7 +150,7 @@ public class Book {
 				return false;
 		} else if (!paper.equals(other.paper))
 			return false;
-		if (Float.floatToIntBits(price) != Float.floatToIntBits(other.price))
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
 		if (publisher == null) {
 			if (other.publisher != null)

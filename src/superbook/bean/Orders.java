@@ -19,8 +19,8 @@ public class Orders {
 	public Orders() {
 		super();
 	}
-	public Orders(int oid, int bid, int uid, String orderCode, int receiver, String userMessage, String phone,
-			Date createTime, Date payDate, Date deliverDate, Date confirmDate, int orderState, int pid) {
+	public Orders(Integer oid, Integer bid, Integer uid, String orderCode, Integer receiver, String userMessage, String phone,
+			Date createTime, Date payDate, Date deliverDate, Date confirmDate, Integer orderState, Integer pid) {
 		super();
 		this.oid = oid;
 		this.bid = bid;
@@ -39,19 +39,19 @@ public class Orders {
 	public int getOid() {
 		return oid;
 	}
-	public void setOid(int oid) {
+	public void setOid(Integer oid) {
 		this.oid = oid;
 	}
 	public int getBid() {
 		return bid;
 	}
-	public void setBid(int bid) {
+	public void setBid(Integer bid) {
 		this.bid = bid;
 	}
 	public int getUid() {
 		return uid;
 	}
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 	public String getOrderCode() {
@@ -63,7 +63,7 @@ public class Orders {
 	public int getReceiver() {
 		return receiver;
 	}
-	public void setReceiver(int receiver) {
+	public void setReceiver(Integer receiver) {
 		this.receiver = receiver;
 	}
 	public String getUserMessage() {
@@ -105,13 +105,13 @@ public class Orders {
 	public int getOrderState() {
 		return orderState;
 	}
-	public void setOrderState(int orderState) {
+	public void setOrderState(Integer orderState) {
 		this.orderState = orderState;
 	}
 	public int getPid() {
 		return pid;
 	}
-	public void setPid(int pid) {
+	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
 	@Override

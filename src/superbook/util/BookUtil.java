@@ -84,7 +84,7 @@ public class BookUtil {
 	  	book.setIsbn(isbn);
 	  	book.setPage(Integer.parseInt(jsonobject_2.getString("page")));
 	  	book.setPaper(jsonobject_2.getString("paper"));
-	  	book.setPrice(jsonobject_2.getLong("price"));
+	  	book.setPrice(jsonobject_2.getDouble("price"));
 	  	book.setPublisher(jsonobject_2.getString("publisher"));
 	  	book.setTitle(jsonobject_2.getString("title"));
 	  	book.setImg(null);

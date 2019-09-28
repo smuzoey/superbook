@@ -14,7 +14,7 @@ public class User {
 	public int getUid() {
 		return uid;
 	}
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 	public String getNickName() {

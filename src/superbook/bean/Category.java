@@ -4,7 +4,7 @@ public class Category {
 	private int cid;
 	private String name;
 	
-	public Category(int cid, String name) {
+	public Category(Integer cid, String name) {
 		super();
 		this.cid = cid;
 		this.name = name;
@@ -17,7 +17,7 @@ public class Category {
 	public int getCid() {
 		return cid;
 	}
-	public void setCid(int cid) {
+	public void setCid(Integer cid) {
 		this.cid = cid;
 	}
 	public String getName() {

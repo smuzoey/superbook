@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import net.sf.json.JSONObject;
+import superbook.util.BeanUtil;
 import superbook.util.JSONUtil;
 
 
@@ -86,11 +87,17 @@ public class BaseServlet extends HttpServlet {
 		}
 	}
 	
+	/**
+	 * 将request请求转换为json
+	 * @param request
+	 * @return
+	 */
 	public JSONObject getJSONParameter(HttpServletRequest request) {
 		JSONObject json = JSONUtil.getJSONParameter(request);
 		return json;
 	}
 	
+//	返回书写信息
 	public void write(HttpServletResponse response, String data) {
 		try {
 		response.setCharacterEncoding("utf-8");
@@ -104,4 +111,20 @@ public class BaseServlet extends HttpServlet {
 		}
 	}
 	
+	/**
+	 * 根据类名返回类对象
+	 * @param maps
+	 * @param className
+	 * @return
+	 */
+	public <T>T getBean(Map<String,Object> maps, String className) {
+		className = "superbook.bean." + className; 
+		T obj = null;
+		try {
+		obj = BeanUtil.getBean(maps, className);
+		}catch(Exception e) {
+			System.out.println("反射对象失败");
+		}
+		return obj;
+	}
 }

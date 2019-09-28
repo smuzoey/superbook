@@ -49,7 +49,7 @@ public class BaseBackFilter implements Filter {
 		System.out.println(uri);
 		uri = StringUtils.remove(uri, contextPath);
 		
-		if(uri.startsWith("/admin")) {
+		if(uri.startsWith("/admin")) {//admin_ProductImage_add
 			String servletPath = StringUtils.substringBetween(uri,"_", "_") + "Servlet";
 			String method =  StringUtils.substringAfterLast(uri,"_" );//取出方法
 			//封装到请求头

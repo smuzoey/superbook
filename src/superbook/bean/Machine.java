@@ -7,7 +7,7 @@ public class Machine {
 	public Machine() {
 		super();
 	}
-	public Machine(int mid, String position, int machineState) {
+	public Machine(Integer mid, String position, Integer machineState) {
 		super();
 		this.mid = mid;
 		this.position = position;
@@ -16,7 +16,7 @@ public class Machine {
 	public int getMid() {
 		return mid;
 	}
-	public void setMid(int mid) {
+	public void setMid(Integer mid) {
 		this.mid = mid;
 	}
 	public String getPosition() {
@@ -28,7 +28,7 @@ public class Machine {
 	public int getMachineState() {
 		return machineState;
 	}
-	public void setMachineState(int machineState) {
+	public void setMachineState(Integer machineState) {
 		this.machineState = machineState;
 	}
 	@Override

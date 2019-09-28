@@ -8,7 +8,7 @@ public class Box {
 	public Box() {
 		super();
 	}
-	public Box(int bid, int mid, int boxState, int size) {
+	public Box(Integer bid, Integer mid, Integer boxState, Integer size) {
 		super();
 		this.bid = bid;
 		this.mid = mid;
@@ -18,25 +18,25 @@ public class Box {
 	public int getBid() {
 		return bid;
 	}
-	public void setBid(int bid) {
+	public void setBid(Integer bid) {
 		this.bid = bid;
 	}
 	public int getMid() {
 		return mid;
 	}
-	public void setMid(int mid) {
+	public void setMid(Integer mid) {
 		this.mid = mid;
 	}
 	public int getBoxState() {
 		return boxState;
 	}
-	public void setBoxState(int boxState) {
+	public void setBoxState(Integer boxState) {
 		this.boxState = boxState;
 	}
 	public int getSize() {
 		return size;
 	}
-	public void setSize(int size) {
+	public void setSize(Integer size) {
 		this.size = size;
 	}
 	@Override

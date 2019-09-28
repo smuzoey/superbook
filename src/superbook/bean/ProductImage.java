@@ -7,7 +7,7 @@ public class ProductImage {
 	public ProductImage() {
 		super();
 	}
-	public ProductImage(int piid, int pid, String type) {
+	public ProductImage(Integer piid, Integer pid, String type) {
 		super();
 		this.piid = piid;
 		this.pid = pid;
@@ -16,13 +16,13 @@ public class ProductImage {
 	public int getPiid() {
 		return piid;
 	}
-	public void setPiid(int piid) {
+	public void setPiid(Integer piid) {
 		this.piid = piid;
 	}
 	public int getPid() {
 		return pid;
 	}
-	public void setPid(int pid) {
+	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
 	public String getType() {

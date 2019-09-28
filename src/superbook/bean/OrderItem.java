@@ -12,7 +12,7 @@ public class OrderItem {
 	public OrderItem() {
 		super();
 	}
-	public OrderItem(int id, int uid, int oid, int number) {
+	public OrderItem(Integer id, Integer uid, Integer oid, Integer number) {
 		super();
 		this.id = id;
 		this.uid = uid;
@@ -22,25 +22,25 @@ public class OrderItem {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public int getUid() {
 		return uid;
 	}
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 	public int getOid() {
 		return oid;
 	}
-	public void setOid(int oid) {
+	public void setOid(Integer oid) {
 		this.oid = oid;
 	}
 	public int getNumber() {
 		return number;
 	}
-	public void setNumber(int number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 	@Override

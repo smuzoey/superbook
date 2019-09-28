@@ -11,7 +11,7 @@ public class Review {
 	public Review() {
 		super();
 	}
-	public Review(int rid, int pid, int uid, String content, Date createDate) {
+	public Review(Integer rid, Integer pid, Integer uid, String content, Date createDate) {
 		super();
 		this.rid = rid;
 		this.pid = pid;
@@ -22,19 +22,19 @@ public class Review {
 	public int getRid() {
 		return rid;
 	}
-	public void setRid(int rid) {
+	public void setRid(Integer rid) {
 		this.rid = rid;
 	}
 	public int getPid() {
 		return pid;
 	}
-	public void setPid(int pid) {
+	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
 	public int getUid() {
 		return uid;
 	}
-	public void setUid(int uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 	public String getContent() {

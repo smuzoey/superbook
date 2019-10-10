@@ -1,12 +1,13 @@
 package superbook.dao;
 
-import superbook.bean.Book;
-import superbook.util.DBUtil;
+import java.util.List;
 
+import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.dbutils.ResultSetHandler;
-import java.util.List;
+
+import superbook.bean.Book;
+import superbook.util.DBUtil;
 
 public class BookDao {
 	
@@ -58,6 +59,22 @@ public class BookDao {
 		return list;
 	}
 	
+	/**
+	 * 根据书名返回书籍详情
+	 * @param title
+	 * @return
+	 */
+	
+	public Book selectByBookTitle(String title) {
+		String sql = "select * from Book where title = ?";
+		Book book = new Book();
+		try {
+			book = DBUtil.select(sql,new BeanHandler<Book>(Book.class),title);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return book;
+	}
 	
 	/**
 	 * 根据isbn返回书籍信息
@@ -74,5 +91,7 @@ public class BookDao {
 		}
 		return book;
 	}
+	
+	
 	
 }

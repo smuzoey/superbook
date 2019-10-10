@@ -14,9 +14,16 @@ import java.awt.image.Raster;
 import java.awt.image.RenderedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
+
+import superbook.servlet.BaseServlet;
 
 public class ImageUtil {
 
@@ -73,6 +80,48 @@ public class ImageUtil {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * 根据文件内容以及文件名和位置创建文件，并返回存储的完整位置
+	 * @param is
+	 * @param filePath
+	 * @param fileName 文件的名字（piid）
+	 * @return
+	 */
+	public static String saveImage(InputStream is, HttpServletRequest request, String fileName) {
+		//创建完整的文件名
+		String filePath = request.getSession().getServletContext().getRealPath("img/product");
+		File f = new File(filePath, fileName + ".jpg");
+		//如果文件不存在创建文件
+		f.getParentFile().mkdirs();
+		
+		//在文件中写入内容
+		 try {
+	    	 if(is != null && 0!=is.available()) {
+	    		 try {
+	    			 FileOutputStream fos = new FileOutputStream(f);
+	    			 byte[] b = new byte[1024*1024];
+	    			 int length =0;
+	    			 while((length = is.read(b))!= -1) {
+	    				 fos.write(b, 0, length);
+	    			 }
+	    			 fos.flush();
+	    			 
+	    			 //创建缩略图
+	    			 String imgFolder_small = request.getSession().getServletContext().getRealPath("img/productsmall");
+	    			 File f_small = new File(imgFolder_small, fileName + ".jpg");
+	    			 ImageUtil.resizeImage(f, 217, 190, f_small);
+	    			 
+	    			 fos.close();
+	    		 }catch(Exception e) {
+	    			 e.printStackTrace();
+	    		 }
+	    	 }
+	     }catch (IOException e) {
+	    	 e.printStackTrace();
+	     }
+		return f.toString();
 	}
 
 }

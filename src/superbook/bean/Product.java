@@ -3,19 +3,21 @@ package superbook.bean;
 import java.util.Date;
 
 public class Product {
-	private int pid;
-	private int cid;//产品类别
-	private int isbn;//书籍信息
-	private double promotePrice;//出售价格
+	private Integer pid;
+	private Integer cid;//产品类别
+	private String isbn;//书籍信息
+	private Double promotePrice;//出售价格
 	private Date createDate;//创建日期
 	private String subTitle;//产品描述
-	private int degree;//产品新旧成度
+	private Integer degree;//产品新旧成度
 	
 	public Product() {
 		super();
 	}
 
-	public Product(Integer pid, Integer cid, Integer isbn, Double promotePrice, Date createDate, String subTitle, int degree) {
+	
+	public Product(Integer pid, Integer cid, String isbn, Double promotePrice, Date createDate, String subTitle,
+			Integer degree) {
 		super();
 		this.pid = pid;
 		this.cid = cid;
@@ -26,7 +28,9 @@ public class Product {
 		this.degree = degree;
 	}
 
-	public int getPid() {
+
+
+	public Integer getPid() {
 		return pid;
 	}
 
@@ -34,7 +38,7 @@ public class Product {
 		this.pid = pid;
 	}
 
-	public int getCid() {
+	public Integer getCid() {
 		return cid;
 	}
 
@@ -42,11 +46,11 @@ public class Product {
 		this.cid = cid;
 	}
 
-	public int getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	public void setIsbn(Integer isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 
@@ -74,7 +78,7 @@ public class Product {
 		this.subTitle = subTitle;
 	}
 
-	public int getDegree() {
+	public Integer getDegree() {
 		return degree;
 	}
 
@@ -83,21 +87,15 @@ public class Product {
 	}
 
 	@Override
-	public String toString() {
-		return "Product [pid=" + pid + ", cid=" + cid + ", isbn=" + isbn + ", promotePrice=" + promotePrice
-				+ ", createDate=" + createDate + ", subTitle=" + subTitle + ", degree=" + degree + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + cid;
+		result = prime * result + ((cid == null) ? 0 : cid.hashCode());
 		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
-		result = prime * result + degree;
-		result = prime * result + isbn;
-		result = prime * result + pid;
-		result = (int) (prime * result + Double.doubleToLongBits(promotePrice));
+		result = prime * result + ((degree == null) ? 0 : degree.hashCode());
+		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
+		result = prime * result + ((pid == null) ? 0 : pid.hashCode());
+		result = prime * result + ((promotePrice == null) ? 0 : promotePrice.hashCode());
 		result = prime * result + ((subTitle == null) ? 0 : subTitle.hashCode());
 		return result;
 	}
@@ -111,20 +109,35 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		if (cid != other.cid)
+		if (cid == null) {
+			if (other.cid != null)
+				return false;
+		} else if (!cid.equals(other.cid))
 			return false;
 		if (createDate == null) {
 			if (other.createDate != null)
 				return false;
 		} else if (!createDate.equals(other.createDate))
 			return false;
-		if (degree != other.degree)
+		if (degree == null) {
+			if (other.degree != null)
+				return false;
+		} else if (!degree.equals(other.degree))
 			return false;
-		if (isbn != other.isbn)
+		if (isbn == null) {
+			if (other.isbn != null)
+				return false;
+		} else if (!isbn.equals(other.isbn))
 			return false;
-		if (pid != other.pid)
+		if (pid == null) {
+			if (other.pid != null)
+				return false;
+		} else if (!pid.equals(other.pid))
 			return false;
-		if (Double.doubleToLongBits(promotePrice) != Double.doubleToLongBits(other.promotePrice))
+		if (promotePrice == null) {
+			if (other.promotePrice != null)
+				return false;
+		} else if (!promotePrice.equals(other.promotePrice))
 			return false;
 		if (subTitle == null) {
 			if (other.subTitle != null)
@@ -134,5 +147,11 @@ public class Product {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [pid=" + pid + ", cid=" + cid + ", isbn=" + isbn + ", promotePrice=" + promotePrice
+				+ ", createDate=" + createDate + ", subTitle=" + subTitle + ", degree=" + degree + "]";
+	}
+	
 	
 }

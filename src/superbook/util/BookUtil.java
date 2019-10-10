@@ -87,7 +87,7 @@ public class BookUtil {
 	  	book.setPrice(jsonobject_2.getDouble("price"));
 	  	book.setPublisher(jsonobject_2.getString("publisher"));
 	  	book.setTitle(jsonobject_2.getString("title"));
-	  	book.setImg(null);
+	  	book.setImg(jsonobject_2.getString("img"));
 	  	result = jsonobject_2.toString();
 //	  	System.out.println(book.toString());
 	}

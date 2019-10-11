@@ -176,7 +176,7 @@ public class ProductServlet extends BaseServlet {
 	
 	
 	/**
-	 * 根据uid展示购物车内容
+	 * 展示购物车内容
 	 * 所需参数: uid
 	 * @param request
 	 * @param response
@@ -186,14 +186,64 @@ public class ProductServlet extends BaseServlet {
 		Map<String, Object> map = (Map) getJSONParameter(request);
 		Integer uid = (Integer)map.get("uid");
 		//返回此uid的全部订单
-		List<Product> product = new OrderItemDao().selectByUid(uid);
-		System.out.println("**************");
-		for(Product p: product) {
-			System.out.println("*" + p.toString());
-		}	 
-		
-
-		 
+		List<Product> list = new OrderItemDao().selectByUid(uid);
+		JSONArray jsonArray = new JSONArray();
+		//遍历订单并将Product与book信息拼接
+		for(Product product : list) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("product", product);
+			jsonObject.put("book", (new BookDao().selectByIsbn(product.getIsbn())));
+			jsonArray.add(jsonObject);
+		}
+		write(response,jsonArray.toString());
 	}	
+	
+
+	/**
+	 * 书籍详情
+	 * 所需参数: pid
+	 * @param request
+	 * @param response
+	 */
+	public void showBook(HttpServletRequest request, HttpServletResponse response) {
+		//解析上传参数
+		Map<String, Object> map = (Map) getJSONParameter(request);
+		//根据pid找出product 与 book 信息
+		Integer pid = (Integer)map.get("pid");
+		Product product = new ProductDao().selectByPid(pid);
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("product", product);
+		jsonObject.put("book", (new BookDao().selectByIsbn(product.getIsbn())));
+		write(response, jsonObject.toString());
+	}
+	
+	/**
+	 * 扫描书籍
+	 * 所需参数: isbn
+	 * @param request
+	 * @param response
+	 */
+	public void scanBook(HttpServletRequest request, HttpServletResponse response) {
+		//解析上传参数
+		Map<String, Object> map = (Map) getJSONParameter(request);
+		String isbn = (String)map.get("isbn");
+		//根据isbn返回书籍详细信息
+		Book book = new BookDao().selectByIsbn(isbn);
+		if(book == null) {  //如果不在数据库Book中
+			System.out.println("ProductServlet.add(书籍在数据库Book中没有)");
+			//调用ShowAPI找到书籍信息,并添加到数据库
+			book = (new BookUtil()).getBook(isbn);
+			(new BookDao()).add(book);
+		
+		} else { //在数据库Book中
+			System.out.println("ProductServlet.add(书籍在数据库Book中存在)");
+			System.out.println("ProductServlet.add " + book.toString());
+		}
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("book", book);
+		write(response, jsonObject.toString());
+		
+	}
+	
 	
 }

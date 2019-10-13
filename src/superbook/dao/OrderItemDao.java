@@ -68,29 +68,17 @@ public class OrderItemDao {
 	}
 	
 	/**
-	 * 根据uid返回此人购物车的订单集
+	 * 根据uid返回product
 	 * @param uid
 	 * @return
-	 
-	
-	public List<OrderItem> selectByUid(int uid) {
-		String sql = "select * from OrderItem where uid=?;";
-		ResultSetHandler<List<OrderItem>> rsh = new BeanListHandler<OrderItem>(OrderItem.class);
-		List<OrderItem> list = null;
-		try {
-			list = DBUtil.select(sql, rsh, uid);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}*/
-	
+	 */
 	public List<Product> selectByUid(int uid) {
-		String sql = "select Product.pid,Product.cid,Product.isbn,Product.promotePrice,Product.createDate,Product.subTitle,Product.degree from Orders,OrderItem,Product where OrderItem.oid=Orders.oid and OrderItem.uid = ? and Product.pid=Orders.pid;";
+		String sql = "select Product.pid,Product.cid,Product.isbn,Product.promotePrice,Product.createDate,Product.subTitle,Product.degree from Orders,OrderItem,Product where OrderItem.oid=Orders.oid and OrderItem.uid = ? and Product.pid=Orders.pid and Orders.orderState=?;";
 		ResultSetHandler<List<Product>> rsh = new BeanListHandler<Product>(Product.class);
 		List<Product> list = null;
+		Integer orderState = 2;
 		try {
-			list = DBUtil.select(sql, rsh, uid);
+			list = DBUtil.select(sql, rsh, uid, orderState);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

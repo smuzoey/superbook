@@ -52,6 +52,16 @@ public class ReviewDao {
 		System.out.println(r);
 		return r;
 	}
-
+	
+	public Review selectByPid(int pid) {
+		String sql = "select * from Review where pid=?;";
+		Review review = new Review();
+		try {
+			review = DBUtil.select(sql, new BeanHandler<Review>(Review.class),pid);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return review;
+	}
 
 }

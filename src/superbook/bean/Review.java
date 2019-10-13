@@ -3,9 +3,9 @@ package superbook.bean;
 import java.util.Date;
 
 public class Review {
-	private int rid;
-	private int pid;
-	private int uid;
+	private Integer rid;
+	private Integer pid;
+	private Integer uid;
 	private String content;//回复内容
 	private Date createDate;
 	public Review() {
@@ -19,19 +19,19 @@ public class Review {
 		this.content = content;
 		this.createDate = createDate;
 	}
-	public int getRid() {
+	public Integer getRid() {
 		return rid;
 	}
 	public void setRid(Integer rid) {
 		this.rid = rid;
 	}
-	public int getPid() {
+	public Integer getPid() {
 		return pid;
 	}
 	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
-	public int getUid() {
+	public Integer getUid() {
 		return uid;
 	}
 	public void setUid(Integer uid) {
@@ -50,19 +50,14 @@ public class Review {
 		this.createDate = createDate;
 	}
 	@Override
-	public String toString() {
-		return "Review [rid=" + rid + ", pid=" + pid + ", uid=" + uid + ", content=" + content + ", createDate="
-				+ createDate + "]";
-	}
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
-		result = prime * result + pid;
-		result = prime * result + rid;
-		result = prime * result + uid;
+		result = prime * result + ((pid == null) ? 0 : pid.hashCode());
+		result = prime * result + ((rid == null) ? 0 : rid.hashCode());
+		result = prime * result + ((uid == null) ? 0 : uid.hashCode());
 		return result;
 	}
 	@Override
@@ -84,13 +79,28 @@ public class Review {
 				return false;
 		} else if (!createDate.equals(other.createDate))
 			return false;
-		if (pid != other.pid)
+		if (pid == null) {
+			if (other.pid != null)
+				return false;
+		} else if (!pid.equals(other.pid))
 			return false;
-		if (rid != other.rid)
+		if (rid == null) {
+			if (other.rid != null)
+				return false;
+		} else if (!rid.equals(other.rid))
 			return false;
-		if (uid != other.uid)
+		if (uid == null) {
+			if (other.uid != null)
+				return false;
+		} else if (!uid.equals(other.uid))
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Review [rid=" + rid + ", pid=" + pid + ", uid=" + uid + ", content=" + content + ", createDate="
+				+ createDate + "]";
+	}
+	
 	
 }

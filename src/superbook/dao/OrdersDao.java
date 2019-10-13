@@ -1,8 +1,11 @@
 package superbook.dao;
 
 import java.util.Date;
+import java.util.List;
 
+import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import superbook.bean.Orders;
 import superbook.util.DBUtil;
@@ -122,6 +125,109 @@ public class OrdersDao {
 		}catch(Exception e ) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 新添加
+	 * 修改订单的bid
+	 * @param oid
+	 * @param bid
+	 */
+	public void changeBid(int oid, int bid) {
+		String sql = "update Orders set bid=? where oid=?;";
+		try {
+			DBUtil.update(sql, bid, oid);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 新添加
+	 * 根据pid返回订单状态
+	 * @param pid
+	 */
+	public int getOrderStateByPid(int pid) {
+		String sql = "select orderState from Orders where pid = ?;";
+		int orderState = 0;
+		try {
+			orderState = Integer.parseInt(DBUtil.select(sql, pid));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return orderState;
+	}
+	
+	/**
+	 * 新添加
+	 * 根据pid返回订单全部信息
+	 * @param pid
+	 * @return
+	 */
+	public Orders selectByPid(int pid) {
+		String sql = "select * from Orders where pid=?;";
+		Orders order = new Orders();
+		try {
+			order = DBUtil.select(sql, new BeanHandler<Orders>(Orders.class), pid);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return order;
+	}
+	
+	/**
+	 * 新添加
+	 * 更新此订单的全部信息
+	 * @param o
+	 */
+	public void updateOrder(Orders o) {
+		String sql = "update Orders set bid=?,orderCode=?,receiver=?,phone=?,userMessage=?,createTime=?,payDate=?,deliverDate=?,confirmDate=?,orderState=? where pid=?;";
+		try {
+			DBUtil.update(sql, o.getBid(),o.getOrderCode(),o.getReceiver(),o.getPhone(),o.getUserMessage(),o.getCreateTime(),o.getPayDate(),o.getDeliverDate(),o.getConfirmDate(),o.getOrderState(),o.getPid());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 根据uid返回他卖的全部订单
+	 * @param uid
+	 * @return
+	 */
+	public List<Orders> selectByUid(int uid) {
+		String sql = "select * from Orders where uid = ?";
+		ResultSetHandler<List<Orders>> rsh = new BeanListHandler<Orders>(Orders.class);
+		List<Orders> list = null;
+		try {
+			list = DBUtil.select(sql,rsh,uid);
+			for(Orders o : list) {
+				System.out.println(o);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+
+	/**
+	 * 根据receiver返回他买的全部订单
+	 * @param receiver
+	 * @return
+	 */
+	public List<Orders> selectByRecever(int receiver) {
+		String sql = "select * from Orders where recevier= ?";
+		ResultSetHandler<List<Orders>> rsh = new BeanListHandler<Orders>(Orders.class);
+		List<Orders> list = null;
+		try {
+			list = DBUtil.select(sql,rsh,receiver);
+			for(Orders o : list) {
+				System.out.println(o.toString());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 }

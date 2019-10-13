@@ -23,7 +23,6 @@ public class ProductDao {
 	public void add(Product p) {
 		String sql = "insert into Product(pid,cid,isbn,promotePrice,createDate,subTitle,degree) values(?,?,?,?,?,?,?);";
 		try {
-			System.out.println("JIJIJI");
 			DBUtil.update(sql, p.getPid(),p.getCid(),p.getIsbn(),p.getPromotePrice(),DateUtil.dtot(p.getCreateDate()),p.getSubTitle(),p.getDegree());
 			System.out.println("Product().Dao成功插入");
 		}catch(Exception e) {
@@ -158,23 +157,20 @@ public class ProductDao {
 	
 	/**
 	 * 新添加
-	 * 根据类别 返回产品信息
+	 * 根据类别和订单状态返回产品信息
 	 * @param cid
 	 * @return
 	 */
 	public List<Product> selectByCid(int cid) {
-		String sql = "select * from Product where cid = ?;";
+		String sql = "select Product.pid,cid,isbn,promotePrice,createDate,subTitle,degree from Product,Orders where Product.pid=Orders.pid and OrderState=? and cid=?;";
 		ResultSetHandler<List<Product>> rsh = new BeanListHandler<Product>(Product.class);
+		int orderState = 2;
 		List<Product> list = null;
 		try {
-			list = DBUtil.select(sql, rsh, cid);
-			for(Product p : list) {
-				System.out.println("ProductDao.selectByCid:  " + p);
-			}
+			list = DBUtil.select(sql, rsh, orderState, cid);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 		return list;
 	}
 	

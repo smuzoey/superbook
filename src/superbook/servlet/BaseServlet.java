@@ -121,7 +121,7 @@ public class BaseServlet extends HttpServlet {
 		className = "superbook.bean." + className; 
 		T obj = null;
 		try {
-			obj = BeanUtil.getBean(maps, className);
+		obj = BeanUtil.getBean(maps, className);
 		}catch(Exception e) {
 			System.out.println("反射对象失败");
 		}

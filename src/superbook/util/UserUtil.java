@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import net.sf.json.JSONObject;
+
 public class UserUtil {
 	private String appid = "wxf2cac0901442aafb";                //小程序 appId
 	private String secret = "05723d26bebf756cb9f06a41e2595881";  //小程序 appSecret
@@ -14,7 +16,7 @@ public class UserUtil {
 	
 	public String getUser(String js_code) { // js_code : 登录时获取的 code
 		//拼接URL
-		String httpUrl = String.format("%s?&secret=%s&js_code==%s&grant_type=%s", WXUrl,secret,js_code,grant_type);
+		String httpUrl = String.format("%s?appid=%s&secret=%s&js_code=%s&grant_type=%s", WXUrl,appid,secret,js_code,grant_type);
 		StringBuffer buff = new StringBuffer();//存储信息
 		
 		try {
@@ -47,6 +49,7 @@ public class UserUtil {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(buff.toString());
 		return buff.toString();
 	}
 }

@@ -17,13 +17,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-
-import superbook.servlet.BaseServlet;
 
 public class ImageUtil {
 
@@ -121,7 +117,8 @@ public class ImageUtil {
 	     }catch (IOException e) {
 	    	 e.printStackTrace();
 	     }
-		return f.toString();
+		String url = "http://sopipi.club:8092/translate/img/product/" +  fileName + ".jpg";
+		return url;
 	}
 
 }

@@ -230,4 +230,11 @@ public class OrdersDao {
 		return list;
 	}
 	
+	/**
+	 * 随机生成订单
+	 */
+	public List<Orders> selectOrders() {
+	String sql="SELECT * FROM orders WHERE orders.orderState = '2' ";
+	return DBUtil.select(sql, new BeanListHandler<Orders>(Orders.class));
+	}
 }

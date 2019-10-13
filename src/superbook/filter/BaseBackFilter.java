@@ -40,7 +40,7 @@ public class BaseBackFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse rep = (HttpServletResponse) response;
-		System.out.println("weq");
+		System.out.println("BaseBackServlet");
 		
 		//http://localhost:8080/test/
 		String contextPath = req.getServletContext().getContextPath();//形如/test

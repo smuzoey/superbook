@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +25,14 @@ import superbook.util.ImageUtil;
 @WebServlet(urlPatterns = "/ProductImageServlet")
 public class ProductImageServlet extends BaseServlet{
 	private static final long serialVersionUID = 1L;
-
+/**
+ * 所需头文件 Content-Type : application/x-www-form-urlencoded
+ * body form-data
+ * @param request
+ * @param response
+ * @throws ServletException
+ * @throws IOException
+ */
 	public void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Yes");
 		//获取文件流

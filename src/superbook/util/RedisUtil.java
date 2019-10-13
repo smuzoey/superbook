@@ -14,7 +14,7 @@ public class RedisUtil {
 		jedis.auth("123456");
 		
 		jedis.set(uuid, openId);//存储
-		jedis.expire(uuid, 60);//默认1分钟
+		jedis.expire(uuid, 6000);//默认1分钟
 	}
 	
 	/**
@@ -28,9 +28,11 @@ public class RedisUtil {
 		
 		jedis.exists(uuid);
 		if(jedis.exists(uuid)) {
-			jedis.expire(uuid, 60);
+			jedis.expire(uuid, 6000);
+			jedis.close();
 			return true;
 		} else {
+			jedis.close();
 			return false;
 		}
 	}
@@ -45,9 +47,11 @@ public class RedisUtil {
 		jedis.auth("123456");
 		
 		if(jedis.exists(uuid)) {
-			jedis.expire(uuid, 60);
+			jedis.expire(uuid, 60000);
+			jedis.close();
 			return jedis.get(uuid);
 		} else {
+			jedis.close();
 			return null;
 		}
 	}

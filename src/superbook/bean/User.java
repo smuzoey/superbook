@@ -1,17 +1,13 @@
 package superbook.bean;
 
 public class User {
-	private int uid;
+	private Integer uid;
 	private String nickName;//用户昵称
-	public User(int uid, String nickName) {
-		super();
-		this.uid = uid;
-		this.nickName = nickName;
-	}
+	private String uuid;
 	public User() {
 		super();
 	}
-	public int getUid() {
+	public Integer getUid() {
 		return uid;
 	}
 	public void setUid(Integer uid) {
@@ -23,16 +19,23 @@ public class User {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 	@Override
 	public String toString() {
-		return "User [uid=" + uid + ", nickName=" + nickName + "]";
+		return "User [uid=" + uid + ", nickName=" + nickName + ", uuid=" + uuid + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
-		result = prime * result + uid;
+		result = prime * result + ((uid == null) ? 0 : uid.hashCode());
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
 		return result;
 	}
 	@Override
@@ -49,9 +52,23 @@ public class User {
 				return false;
 		} else if (!nickName.equals(other.nickName))
 			return false;
-		if (uid != other.uid)
+		if (uid == null) {
+			if (other.uid != null)
+				return false;
+		} else if (!uid.equals(other.uid))
+			return false;
+		if (uuid == null) {
+			if (other.uuid != null)
+				return false;
+		} else if (!uuid.equals(other.uuid))
 			return false;
 		return true;
+	}
+	public User(Integer uid, String nickName, String uuid) {
+		super();
+		this.uid = uid;
+		this.nickName = nickName;
+		this.uuid = uuid;
 	}
 	
 }

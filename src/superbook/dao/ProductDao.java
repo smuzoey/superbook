@@ -168,6 +168,9 @@ public class ProductDao {
 		List<Product> list = null;
 		try {
 			list = DBUtil.select(sql, rsh, orderState, cid);
+			for(Product p:list) {
+				System.out.println(p.toString());
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

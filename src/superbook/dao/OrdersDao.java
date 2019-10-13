@@ -215,8 +215,8 @@ public class OrdersDao {
 	 * @param receiver
 	 * @return
 	 */
-	public List<Orders> selectByRecever(int receiver) {
-		String sql = "select * from Orders where recevier= ?";
+	public List<Orders> selectByReceiver(int receiver) {
+		String sql = "select * from Orders where receiver= ?";
 		ResultSetHandler<List<Orders>> rsh = new BeanListHandler<Orders>(Orders.class);
 		List<Orders> list = null;
 		try {

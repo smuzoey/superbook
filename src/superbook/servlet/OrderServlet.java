@@ -30,6 +30,7 @@ public class OrderServlet extends BaseServlet {
 	
 	
 	/**
+	 * 测试完成
 	 * 分类展示书籍
 	 * 参数: cid
 	 * 前端: product+book
@@ -42,6 +43,11 @@ public class OrderServlet extends BaseServlet {
 		//根据cid获取书籍 
 		int cid = (int)map.get("cid");
 		List<Product> list = new ProductDao().selectByCid(cid);
+		for(Product p: list) {
+			System.out.println(p.toString());
+		}
+		System.out.println(list.size());
+		System.out.println("**************");
 		JSONArray jsonArray = new JSONArray();
 		for(Product product : list) {
 			JSONObject jsonObject = new JSONObject();
@@ -54,6 +60,7 @@ public class OrderServlet extends BaseServlet {
 	
 	
 	/**
+	 * 测试完成
 	 * 获取书籍详情
 	 * 参数: pid
 	 * 前端: book + product + review
@@ -74,6 +81,7 @@ public class OrderServlet extends BaseServlet {
 	}
 	
 	/**
+	 * 测试完成
 	 * 买书
 	 * 参数: pid, phone, userMessage
 	 * 前端: true
@@ -90,6 +98,7 @@ public class OrderServlet extends BaseServlet {
 		order.setCreateTime(new Date());
 		order.setOrderState(3);
 		order.setReceiver((Integer)request.getAttribute("uid"));
+		//order.setReceiver(3);
 		order.setPhone((String)map.get("phone"));
 		order.setUserMessage((String)map.get("userMessage"));
 		//更新订单信息
@@ -125,6 +134,7 @@ public class OrderServlet extends BaseServlet {
 	}
 	
 	/**
+	 * 测试完
 	 * 出货
 	 * 参数:pid
 	 * @param request
@@ -147,6 +157,7 @@ public class OrderServlet extends BaseServlet {
 	}
 	
 	/**
+	 * 测试完
 	 * 确认收货
 	 * 参数: pid
 	 * @param request
@@ -167,7 +178,7 @@ public class OrderServlet extends BaseServlet {
 		write(response, json.toString());
 	}
 	
-	/**
+	/**测试完
 	 * 根据uid返回他卖的订单
 	 * 参数: 无
 	 * @param request
@@ -176,6 +187,7 @@ public class OrderServlet extends BaseServlet {
 	public void showSellOrders(HttpServletRequest request, HttpServletResponse response) {
 		//获取uid
 		int uid = (int)request.getAttribute("uid");
+		//int uid = 1;
 		List<Orders> list = new OrdersDao().selectByUid(uid);
 		JSONArray jsonArray = new JSONArray();
 		for(Orders order: list) {
@@ -190,6 +202,7 @@ public class OrderServlet extends BaseServlet {
 	}
 	
 	/**
+	 * 测试完
 	 * 根据uid返回他买的订单
 	 * 参数: 无
 	 * @param request
@@ -197,9 +210,10 @@ public class OrderServlet extends BaseServlet {
 	 */
 	public void showBuyOrders(HttpServletRequest request, HttpServletResponse response) {
 		//获取uid
-		int uid = (int)request.getAttribute("uid");
-		List<Orders> list = new OrdersDao().selectByRecever(uid);
+		int receiver = (int)request.getAttribute("uid");
+		List<Orders> list = new OrdersDao().selectByReceiver(receiver);
 		JSONArray jsonArray = new JSONArray();
+		System.out.println("******************");
 		for(Orders order: list) {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("order", order);

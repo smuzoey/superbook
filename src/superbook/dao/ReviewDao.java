@@ -23,14 +23,18 @@ public class ReviewDao {
 		}
 	}
 	
+
 	/**
-	 * 删除评论信息
-	 * @param rid
+	 * 修改
+	 * 删除评论信息 
+	 * 参数: pid uid
+	 * @param pid
+	 * @param uid
 	 */
-	public void delete(int rid) {
-		String sql = "delete from Review where rid = ?;";
+	public void delete(int pid, int uid) {
+		String sql = "delete from Review where pid=? and uid=?;";
 		try {
-			DBUtil.update(sql, rid);
+			DBUtil.update(sql, pid, uid);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -53,6 +57,11 @@ public class ReviewDao {
 		return r;
 	}
 	
+	/**
+	 * 通过pid返回评论表
+	 * @param pid
+	 * @return
+	 */
 	public Review selectByPid(int pid) {
 		String sql = "select * from Review where pid=?;";
 		Review review = new Review();
@@ -63,5 +72,7 @@ public class ReviewDao {
 		}
 		return review;
 	}
+	
+
 
 }

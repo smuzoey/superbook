@@ -11,7 +11,7 @@ public class BoxDao {
 	 * @param box
 	 */
 	public void add(Box box) {
-		String sql = "insert into Box( mid, boxState, size) values(?,?,?);";
+		String sql = "insert into box( mid, boxState, size) values(?,?,?);";
 		try {
 			DBUtil.update(sql,  box.getMid(), box.getBoxState(), box.getSize());	
 		}catch(Exception e) {
@@ -24,7 +24,7 @@ public class BoxDao {
 	 * @param bid
 	 */
 	public void delete(int bid) {
-		String sql = "delete from Box where bid = ?;";
+		String sql = "delete from box where bid = ?;";
 		try {
 			DBUtil.update(sql, bid);
 		}catch(Exception e) {
@@ -38,7 +38,7 @@ public class BoxDao {
 	 * @return
 	 */
 	public int selectMid(int bid) {
-		String sql = "select mid from Box where bid = ?;";
+		String sql = "select mid from box where bid = ?;";
 		String result = null;
 		try {
 			result = DBUtil.select(sql, bid);
@@ -55,7 +55,7 @@ public class BoxDao {
 	 * @return
 	 */
 	public int selectBoxState(int bid) {
-		String sql = "select boxState from Box where bid = ?;";
+		String sql = "select boxState from box where bid = ?;";
 		String result = null;
 		try {
 			result = DBUtil.select(sql, bid);
@@ -71,7 +71,7 @@ public class BoxDao {
 	 * @return
 	 */
 	public int selectSize(int bid) {
-		String sql = "select size from Box where bid = ?;";
+		String sql = "select size from box where bid = ?;";
 		String result = null;
 		try {
 			result = DBUtil.select(sql, bid);
@@ -87,7 +87,7 @@ public class BoxDao {
 	 * @param boxState  要更改的箱子状态
 	 */
 	public void changeState(int bid,int boxState) {
-		String sql = "update Box set  boxState = ? where bid = ?;";
+		String sql = "update box set  boxState = ? where bid = ?;";
 		try {
 			DBUtil.update(sql, boxState,bid);
 		}catch(Exception e ) {

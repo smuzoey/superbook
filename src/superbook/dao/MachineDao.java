@@ -10,7 +10,7 @@ public class MachineDao {
 	 * @param machine
 	 */
 	public void add(Machine machine) {
-		String sql = "insert into Machine(mid, position, machineState) values(?,?,?);";
+		String sql = "insert into machine(mid, position, machineState) values(?,?,?);";
 		try {
 			DBUtil.update(sql, machine.getMid(),machine.getPosition(), machine.getMachineState());
 		}catch(Exception e) {
@@ -23,7 +23,7 @@ public class MachineDao {
 	 * @param mid
 	 */
 	public void delete(int mid) {
-		String sql = "delete from Machine where mid = ?;";
+		String sql = "delete from machine where mid = ?;";
 		try {
 			DBUtil.update(sql, mid);
 		}catch(Exception e) {
@@ -38,7 +38,7 @@ public class MachineDao {
 	 */
 	public String selectPosition(int mid) {
 		String result =null;
-		String sql = "select position from Machine where mid = ?;";
+		String sql = "select position from machine where mid = ?;";
 		try {
 			result = DBUtil.select(sql, mid);
 		}catch(Exception e) {
@@ -54,7 +54,7 @@ public class MachineDao {
 	 */
 	public int selectMachineState(int mid) {
 		String result = null;
-		String sql = "select machineState from Machine where mid = ?;";
+		String sql = "select machineState from machine where mid = ?;";
 		try {
 			result = DBUtil.select(sql, mid);
 		}catch(Exception e) {
@@ -69,7 +69,7 @@ public class MachineDao {
 	 * @param machineState  要更改的箱子状态
 	 */
 	public void changeState(int mid,int machineState) {
-		String sql = "update Machine set  machineState = ? where mid = ?;";
+		String sql = "update machine set  machineState = ? where mid = ?;";
 		try {
 			DBUtil.update(sql, machineState,mid);
 		}catch(Exception e ) {

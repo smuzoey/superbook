@@ -15,7 +15,7 @@ public class ReviewDao {
 	 * @param r
 	 */
 	public void add(Review r) {
-		String sql = "insert into Review(rid,pid,uid,content,createDate) values(?,?,?,?,?);";
+		String sql = "insert into review(rid,pid,uid,content,createDate) values(?,?,?,?,?);";
 		try {
 			DBUtil.update(sql, r.getRid(),r.getPid(),r.getUid(),r.getContent(),DateUtil.dtot(r.getCreateDate()));
 		}catch(Exception e) {
@@ -32,7 +32,7 @@ public class ReviewDao {
 	 * @param uid
 	 */
 	public void delete(int pid, int uid) {
-		String sql = "delete from Review where pid=? and uid=?;";
+		String sql = "delete from review where pid=? and uid=?;";
 		try {
 			DBUtil.update(sql, pid, uid);
 		}catch(Exception e) {
@@ -46,7 +46,7 @@ public class ReviewDao {
 	 * @return
 	 */
 	public Review selectByRid(int rid) {
-		String sql = "select * from Review where rid = ?;";
+		String sql = "select * from review where rid = ?;";
 		Review r = new Review();
 		try {
 			r = DBUtil.select(sql, new BeanHandler<Review>(Review.class),rid);
@@ -63,7 +63,7 @@ public class ReviewDao {
 	 * @return
 	 */
 	public Review selectByPid(int pid) {
-		String sql = "select * from Review where pid=?;";
+		String sql = "select * from review where pid=?;";
 		Review review = new Review();
 		try {
 			review = DBUtil.select(sql, new BeanHandler<Review>(Review.class),pid);

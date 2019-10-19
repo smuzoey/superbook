@@ -16,7 +16,7 @@ public class BookDao {
 	 * @param b  //Book
 	 */
 	public void add(Book b) {
-		String sql = "insert into Book(isbn,publisher,binding,page,author,paper,title,price,img,gist) values(?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into book(isbn,publisher,binding,page,author,paper,title,price,img,gist) values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			DBUtil.update(sql,b.getIsbn(),b.getPublisher(),b.getBinding(),b.getPage(),b.getAuthor(),b.getPaper(),b.getTitle(),b.getPrice(),b.getImg(),b.getGist());
 		}catch(Exception e) {
@@ -30,7 +30,7 @@ public class BookDao {
 	 * @param isbn
 	 */
 	public void delete(String isbn) {
-		String sql = "delete from Book where isbn = ?";
+		String sql = "delete from book where isbn = ?";
 		try {
 			DBUtil.update(sql, isbn);
 		}catch(Exception e) {
@@ -45,7 +45,7 @@ public class BookDao {
 	 * @return
 	 */
 	public List<Book> selectByTitle(String title) {
-		String sql = "select * from Book where title = ?";
+		String sql = "select * from book where title = ?";
 		ResultSetHandler<List<Book>> rsh = new BeanListHandler<Book>(Book.class);
 		List<Book> list = null;
 		try {
@@ -66,7 +66,7 @@ public class BookDao {
 	 */
 	
 	public Book selectByBookTitle(String title) {
-		String sql = "select * from Book where title = ?";
+		String sql = "select * from book where title = ?";
 		Book book = new Book();
 		try {
 			book = DBUtil.select(sql,new BeanHandler<Book>(Book.class),title);
@@ -82,7 +82,7 @@ public class BookDao {
 	 * @return
 	 */
 	public Book selectByIsbn(String isbn) {
-		String sql = "select * from Book where isbn = ?";
+		String sql = "select * from book where isbn = ?";
 		Book book = new Book();
 		try {
 			book = DBUtil.select(sql,new BeanHandler<Book>(Book.class),isbn);
@@ -92,6 +92,12 @@ public class BookDao {
 		return book;
 	}
 	
-	
+	public static void main(String[] args) {
+		Book book = new Book();
+		book.setIsbn("123");
+		book.setTitle("张宇");
+		book = new BookDao().selectByIsbn("123");
+		System.out.println(book.toString());
+	}
 	
 }

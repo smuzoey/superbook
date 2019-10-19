@@ -19,7 +19,7 @@ public class OrderItemDao {
 	 * @return
 	 */
 	public OrderItem searchByOid(int oid, int uid) {
-		String sql = "select * from OrderItem where oid = ? and uid = ?;";
+		String sql = "select * from orderItem where oid = ? and uid = ?;";
 		OrderItem orderItem = new OrderItem();
 		try {
 			orderItem = DBUtil.select(sql, new BeanHandler<OrderItem>(OrderItem.class),oid, uid);
@@ -44,7 +44,7 @@ public class OrderItemDao {
 		else {
 			System.out.println("此OrderItem不存在数据库中");
 		
-			String sql = "insert into OrderItem(id,oid,uid,number) values(?,?,?,?);";
+			String sql = "insert into orderItem(id,oid,uid,number) values(?,?,?,?);";
 			try {
 				DBUtil.update(sql, o.getId(),o.getOid(),o.getUid(),o.getNumber());
 			}catch(Exception e) {
@@ -59,7 +59,7 @@ public class OrderItemDao {
 	 * @param id
 	 */
 	public void delete(int uid, int oid) {
-		String sql = "delete from OrderItem where uid=? and oid=?;";
+		String sql = "delete from orderItem where uid=? and oid=?;";
 		try {
 			DBUtil.update(sql, uid, oid);
 		}catch(Exception e) {
@@ -73,7 +73,7 @@ public class OrderItemDao {
 	 * @return
 	 */
 	public List<Product> selectByUid(int uid) {
-		String sql = "select Product.pid,Product.cid,Product.isbn,Product.promotePrice,Product.createDate,Product.subTitle,Product.degree from Orders,OrderItem,Product where OrderItem.oid=Orders.oid and OrderItem.uid = ? and Product.pid=Orders.pid and Orders.orderState=?;";
+		String sql = "select product.pid,product.cid,product.isbn,product.promotePrice,product.createDate,product.subTitle,product.degree from orders,orderItem,product where orderItem.oid=orders.oid and orderItem.uid = ? and product.pid=orders.pid and orders.orderState=?;";
 		ResultSetHandler<List<Product>> rsh = new BeanListHandler<Product>(Product.class);
 		List<Product> list = null;
 		Integer orderState = 2;

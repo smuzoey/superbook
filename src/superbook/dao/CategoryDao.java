@@ -10,7 +10,7 @@ public class CategoryDao {
 	 * @param category
 	 */
 	public void add(Category category) {
-		String sql = "insert into Category(cid, name) values(?,?);";
+		String sql = "insert into category(cid, name) values(?,?);";
 		try {
 			DBUtil.update(sql, category.getCid(), category.getName());
 		}catch(Exception e) {
@@ -23,7 +23,7 @@ public class CategoryDao {
 	 * @param cid
 	 */
 	public void delete(int cid) {
-		String sql = "delete from Category where cid = ?;";
+		String sql = "delete from category where cid = ?;";
 		try {
 			DBUtil.update(sql, cid);
 		}catch(Exception e) {
@@ -38,7 +38,7 @@ public class CategoryDao {
 	 */
 	public String selectname(int cid) {
 		String result = null;
-		String sql = "select name from Category where cid = ?;";
+		String sql = "select name from category where cid = ?;";
 		try {
 			result = DBUtil.select(sql, cid);
 		}catch(Exception e) {
@@ -49,7 +49,7 @@ public class CategoryDao {
 	
 	public int selectcid(String name) {
 		String result = null;
-		String sql = "select cid from Category where name = ?;";
+		String sql = "select cid from category where name = ?;";
 		try {
 			result = DBUtil.select(sql, name);
 		}catch(Exception e) {
